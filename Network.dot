@@ -1,0 +1,13 @@
+digraph Network {
+rankdir=LR;
+	graph [label="Network", labelloc=t, fontsize=20]; 
+	node [shape=doublecircle, style = filled, fillcolor=white, color = black];
+	node [shape=circle];
+	node [color=black, fontcolor=black];
+	edge [color=black];
+	B -> A
+	E -> A
+	A -> J
+	A -> M
+
+}
