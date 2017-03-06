@@ -144,14 +144,13 @@ public class Visitor extends BayesGrammarBaseVisitor{
     }
 	
 	public int validateNetwork() {
-        int cant = 0;
+        int total = 0;
         for (int i = 0; i < this.bayesianNetwork.size(); i++) {
             Node node = this.bayesianNetwork.get(i);
-            int cantPrecedence = node.getPrecedence().size();
-            cantPrecedence = (int)Math.pow(2, cantPrecedence);
-            cant += cantPrecedence;
-            
+            int countPrecedence = node.getPrecedence().size();
+            countPrecedence = (int)Math.pow(2, countPrecedence);
+            total += countPrecedence;
         }
-        return cant;
+        return total;
     }
 }
