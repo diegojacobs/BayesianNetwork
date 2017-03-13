@@ -15,6 +15,7 @@ public class myFile {
 	private StringBuilder sb = new StringBuilder();
 	private String name;
 	private String path;
+	private int numberOfLines;
 	
 	public myFile()
 	{
@@ -33,13 +34,18 @@ public class myFile {
 			
 			name = file.getName();
 			path = file.getPath();
+			this.numberOfLines = 0;
 			
 			Scanner input = new Scanner(file);
 			
 			while (input.hasNext())
 			{
-				sb.append(input.nextLine());
+				String line =input.nextLine();
+				sb.append(line);
 				sb.append("\n");
+				if(!line.startsWith("/")){
+					this.numberOfLines++;
+				}
 			}
 			
 			input.close();
@@ -114,5 +120,13 @@ public class myFile {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public int getNumberOfLines() {
+		return numberOfLines;
+	}
+
+	public void setNumberOfLines(int numberOfLines) {
+		this.numberOfLines = numberOfLines;
 	}
 }

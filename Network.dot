@@ -5,9 +5,9 @@ rankdir=LR;
 	node [shape=circle];
 	node [color=black, fontcolor=black];
 	edge [color=black];
-	B -> A
-	E -> A
-	A -> J
-	A -> M
+	A -> C
+	A -> D
+	B -> D
+	C -> E
 
 }

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 
 
 
@@ -11,13 +10,13 @@ import java.util.HashSet;
  * @author Diego Jacobs
  *
  */
-public class Visitor extends BayesGrammarBaseVisitor{
+public class VisitorValidator extends BayesGrammarBaseVisitor<Object>{
     private ArrayList<Node> bayesianNetwork;
     private Node currentNode;
     private boolean condition;
     private String currentId;
     
-	public Visitor(){
+	public VisitorValidator(){
 		this.condition = false;
 		bayesianNetwork = new ArrayList<Node>();
 	}
@@ -94,7 +93,7 @@ public class Visitor extends BayesGrammarBaseVisitor{
                     this.bayesianNetwork.add(currentNode);
             }
         }
-		
+
         condition = false;
         return null;
 	}
@@ -121,9 +120,9 @@ public class Visitor extends BayesGrammarBaseVisitor{
 		for (int i = 0; i < ctx.getChildCount(); i++){
             String child = ctx.getChild(i).getText();
             if (!child.equals(",") && !child.equals("!")) {
-                if (condition) {
+                if (condition) { 
                     Node node = this.searchForNode(child);
-                    currentNode.addToPrecedence(node);
+                    currentNode.addToPrevious(node);
                 } 
                 else
                 	currentId = child;
@@ -152,5 +151,19 @@ public class Visitor extends BayesGrammarBaseVisitor{
             total += countPrecedence;
         }
         return total;
+    }
+	
+	public boolean validateRepetitives(String n) {
+        boolean valid = true;
+        String[] var = n.split("\\n");
+        for (int i = 0; i < var.length; i ++) {
+            String str1 = var[i];
+           for (int j = 0; j < var.length; j++) {
+               if (str1.equals(var[j]) && j != i && !str1.contains("//") && !str1.isEmpty()) {
+                   valid = false;
+               }
+           }
+        }
+        return valid;
     }
 }

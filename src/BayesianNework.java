@@ -42,11 +42,36 @@ public class BayesianNework {
 		        ParseTree tree = contexto;
 		        
 		        int errorsCount = parser.getNumberOfSyntaxErrors();
-		        System.out.println(errorsCount);
 		        if(errorsCount == 0){
-		            Visitor visitor = new Visitor();
-		            visitor.visit(tree);
-		            GraphicNetwork graphViz = new GraphicNetwork(visitor.getBayesianNetwork());
+		            VisitorValidator visitorValidator = new VisitorValidator();
+		            visitorValidator.visit(tree);
+		            
+		            new GraphicNetwork(visitorValidator.getBayesianNetwork());
+		            
+		            VisitorTable visitorTable = new VisitorTable();
+		            visitorTable.visit(tree);
+		            
+		            String redBayesianaProbs = visitorTable.totalExpression();
+		            
+		            //Tabla completa
+		            System.out.println("Complete Table");
+		            for (Node node: visitorTable.getNetwork()) {
+		                System.out.println(node.toString());
+		            }
+		            System.out.println("");
+		            
+		            boolean validCantProbs = file.getNumberOfLines() == visitorValidator.validateNetwork();
+		            boolean validProbsEquality = visitorValidator.validateRepetitives(file.getSb().toString());
+		            
+		            System.out.println((validProbsEquality && validCantProbs) ? "Is Valid" : "Is not Valid");
+		            
+		            ArrayList<Node> network = visitorValidator.getBayesianNetwork();
+		            ArrayList<Node> completeNetwork = visitorTable.getNetwork();
+		            
+		        }
+		        else
+		        {
+		        	JOptionPane.showMessageDialog(null, "File invalid. Semantic Error");
 		        }
 			}
 		}catch(Exception ex)

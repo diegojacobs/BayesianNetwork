@@ -10,15 +10,15 @@ import java.util.ArrayList;
  * @param <T>
  *
  */
-public class Node<T> {
+public class Node {
 	private String id;
-	private ArrayList<Node> precedence;
+	private ArrayList<Node> previous;
 	private double probability;
 	private String expression;
 	
 	public Node(String id){
 		this.id = id;
-		this.precedence = new ArrayList<>();
+		this.previous = new ArrayList<>();
 	}
 
 	public String getId() {
@@ -30,11 +30,11 @@ public class Node<T> {
 	}
 
 	public ArrayList<Node> getPrecedence() {
-		return precedence;
+		return previous;
 	}
 
-	public void setPrecedence(ArrayList<Node> precedence) {
-		this.precedence = precedence;
+	public void setPrevious(ArrayList<Node> precedence) {
+		this.previous = precedence;
 	}
 
 	public double getProbability() {
@@ -53,8 +53,8 @@ public class Node<T> {
 		this.expression = expression;
 	}
 	
-	public void addToPrecedence(Node node) {
-		this.precedence.add(node);
+	public void addToPrevious(Node node) {
+		this.previous.add(node);
 	}
 	
 	@Override
@@ -73,10 +73,18 @@ public class Node<T> {
 
         return this.id.equals(node.getId()); 
 	}
-
+	
+	public String specialToString() {
+        String prevNodes = "";
+        for (Node bn: this.previous) {
+            prevNodes += bn.getId() + ", ";
+        }
+        
+        return "Id: " + this.id + " prevNodes: " + (prevNodes.isEmpty() ? "No tiene" : prevNodes);
+    }
+	
 	@Override
 	public String toString() {
-		return "Node [id = " + id.toString() + ", precedence = " + precedence
-				+ ", probability = " + probability + "]";
+		return "Node [expression = " + expression.toString() + ", probability = " + probability + "]";
 	}
 }

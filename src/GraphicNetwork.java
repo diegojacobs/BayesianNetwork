@@ -47,7 +47,7 @@ public class GraphicNetwork {
     }
 
     private ArrayList<Node> getNodes(String id, ArrayList<Node> network) {
-        ArrayList<Node> destination = new ArrayList();
+        ArrayList<Node> destination = new ArrayList<>();
         for (int i = 0; i < network.size(); i++) {
             Node node = network.get(i);
             ArrayList<Node> prec = node.getPrecedence();
