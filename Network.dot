@@ -6,8 +6,7 @@ rankdir=LR;
 	node [color=black, fontcolor=black];
 	edge [color=black];
 	A -> C
-	A -> D
-	B -> D
-	C -> E
+	B -> C
+	C -> D
 
 }
